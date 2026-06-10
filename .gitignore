@@ -1,5 +1,6 @@
 # Office temporary lock files
 ~$*.docx
+~WRL*.tmp
 
 # Local server / tooling leftovers
 .server.pid
