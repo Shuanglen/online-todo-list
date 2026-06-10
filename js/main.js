@@ -239,6 +239,10 @@
       // --- Remove task ---
       function removeTask(index, liElement) {
         const removed = todos[index];
+        if (!removed || liElement.dataset.deleting === 'true') return;
+        liElement.dataset.deleting = 'true';
+        let finished = false;
+        let fallbackTimer = null;
 
         liElement.style.animation = 'none';
         void liElement.offsetHeight;
@@ -246,6 +250,10 @@
         liElement.classList.add('removing');
 
         function done() {
+          if (finished) return;
+          finished = true;
+          clearTimeout(fallbackTimer);
+
           todos.splice(index, 1);
           save();
           renderAll();
@@ -253,7 +261,7 @@
         }
 
         liElement.addEventListener('animationend', done, { once: true });
-        setTimeout(() => {
+        fallbackTimer = setTimeout(() => {
           if (liElement.classList.contains('removing')) done();
         }, 400);
       }
