@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>待办事项工具</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- ===== Sidebar Overlay (mobile) ===== -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <span>待办事项工具</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-filter="all">
+          📋 全部任务
+          <span class="badge" id="badgeAll">0</span>
+        </button>
+        <button class="nav-item" data-filter="pending">
+          ⏳ 未完成
+          <span class="badge" id="badgePending">0</span>
+        </button>
+        <button class="nav-item" data-filter="done">
+          ✅ 已完成
+          <span class="badge" id="badgeDone">0</span>
+        </button>
+      </nav>
+
+      <div>
+        <div class="sidebar-section-title">优先级</div>
+        <nav class="sidebar-nav">
+          <button class="nav-item priority-high" data-filter="high">
+            <span class="nav-dot"></span> 高优先级
+            <span class="badge" id="badgeHigh">0</span>
+          </button>
+          <button class="nav-item priority-medium" data-filter="medium">
+            <span class="nav-dot"></span> 中优先级
+            <span class="badge" id="badgeMedium">0</span>
+          </button>
+          <button class="nav-item priority-low" data-filter="low">
+            <span class="nav-dot"></span> 低优先级
+            <span class="badge" id="badgeLow">0</span>
+          </button>
+        </nav>
+      </div>
+
+      <div>
+        <div class="sidebar-section-title">今日到期</div>
+        <nav class="sidebar-nav">
+          <button class="nav-item" data-filter="today">
+            📅 今日任务
+            <span class="badge" id="badgeToday">0</span>
+          </button>
+          <button class="nav-item" data-filter="overdue">
+            ⚠️ 已逾期
+            <span class="badge" id="badgeOverdue">0</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-progress">
+          <div class="progress-label">
+            <span>完成进度</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== Main Content ===== -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <button class="btn-hamburger" id="btnHamburger" aria-label="菜单">☰</button>
+        <h1 class="page-title">我的任务</h1>
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="搜索任务..." autocomplete="off">
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-row">
+        <div class="stat-card accent">
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-label">全部任务</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-value" id="statPending">0</div>
+          <div class="stat-label">待完成</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-value" id="statDone">0</div>
+          <div class="stat-label">已完成</div>
+        </div>
+        <div class="stat-card danger">
+          <div class="stat-value" id="statOverdue">0</div>
+          <div class="stat-label">已逾期</div>
+        </div>
+      </div>
+
+      <!-- Task Input -->
+      <div class="task-input-section">
+        <div class="input-row">
+          <input type="text" id="taskInput" placeholder="添加新的待办事项..." maxlength="150" autocomplete="off">
+          <button class="btn-primary" id="btnAdd">✚ 添加任务</button>
+        </div>
+        <div class="input-options">
+          <select id="prioritySelect">
+            <option value="medium">中优先级</option>
+            <option value="high">高优先级</option>
+            <option value="low">低优先级</option>
+          </select>
+          <input type="date" id="dateInput">
+        </div>
+      </div>
+
+      <!-- Task List -->
+      <div class="task-list-container">
+        <div class="task-list-header">
+          <span class="list-title" id="listTitle">全部任务</span>
+          <span class="list-count" id="listCount">0 项</span>
+        </div>
+        <ul class="task-list" id="taskList"></ul>
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">📝</div>
+          <div class="empty-title">还没有任务</div>
+          <div class="empty-desc">在上方输入框添加你的第一个待办事项吧</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

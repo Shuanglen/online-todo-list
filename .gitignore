@@ -1,0 +1,10 @@
+# Office temporary lock files
+~$*.docx
+
+# Local server / tooling leftovers
+.server.pid
+
+# OS/editor noise
+Thumbs.db
+.DS_Store
+.vscode/
